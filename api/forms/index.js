@@ -52,11 +52,11 @@ async function getAllAssignedForms(erpnextUrl, authorization) {
   const formsByDoctype = {};
 
   assignedForms.forEach(form => {
-    const key = form.doctype;
+    const key = form.form_doctype;
     if (!formsByDoctype[key]) {
       formsByDoctype[key] = {
-        doctype: form.doctype,
-        label: form.label || form.doctype,
+        doctype: form.form_doctype,
+        label: form.label || form.form_doctype,
         icon: form.icon || 'file-text',
         assigned_users: [],
         total_assignments: 0
