@@ -35,7 +35,7 @@ if not frappe.db.exists("DocType", "Assigned Form"):
         "module": "Custom",
         "custom": 1,
         "fields": [
-            {"fieldname": "doctype", "fieldtype": "Link", "label": "DocType", "options": "DocType", "reqd": 1},
+            {"fieldname": "form_doctype", "fieldtype": "Link", "label": "DocType", "options": "DocType", "reqd": 1},
             {"fieldname": "label", "fieldtype": "Data", "label": "Display Label", "reqd": 1},
             {"fieldname": "icon", "fieldtype": "Data", "label": "Icon"},
             {"fieldname": "assigned_to", "fieldtype": "Link", "label": "Assigned To", "options": "User", "reqd": 1}
