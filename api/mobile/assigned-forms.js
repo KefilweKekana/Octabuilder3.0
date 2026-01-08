@@ -33,8 +33,8 @@ export default async function handler(req, res) {
       // Format for mobile app
       const assignedForms = assignments.map(assignment => ({
         name: assignment.name,
-        doctype: assignment.doctype,
-        label: assignment.label || assignment.doctype,
+        doctype: assignment.form_doctype,
+        label: assignment.label || assignment.form_doctype,
         icon: assignment.icon || 'file-text',
         assigned_to: assignment.assigned_to
       }));
