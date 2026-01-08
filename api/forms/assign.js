@@ -51,7 +51,7 @@ export default async function handler(req, res) {
 
 async function getAssignments(erpnextUrl, authorization, doctype) {
   const filters = doctype
-    ? `[["doctype","=","${doctype}"]]`
+    ? `[["form_doctype","=","${doctype}"]]`
     : '[]';
 
   const response = await fetch(
@@ -68,10 +68,9 @@ async function getAssignments(erpnextUrl, authorization, doctype) {
 }
 
 async function createAssignment(erpnextUrl, authorization, assignmentData) {
-  // The Assigned Form DocType has a field named "doctype" which stores the target DocType name
-  // We send it in the body along with other fields
+  // Create assignment - use form_doctype field to avoid naming conflict with meta doctype field
   const doc = {
-    doctype: assignmentData.doctype,
+    form_doctype: assignmentData.doctype,
     label: assignmentData.label || assignmentData.doctype,
     icon: assignmentData.icon || 'file-text',
     assigned_to: assignmentData.assigned_to
@@ -96,9 +95,9 @@ async function createAssignment(erpnextUrl, authorization, assignmentData) {
 }
 
 async function deleteAssignment(erpnextUrl, authorization, doctype, assignedTo) {
-  // Find the assignment record
+  // Find the assignment record using form_doctype field
   const response = await fetch(
-    `${erpnextUrl}/api/resource/Assigned Form?filters=[["doctype","=","${doctype}"],["assigned_to","=","${assignedTo}"]]&fields=["name"]`,
+    `${erpnextUrl}/api/resource/Assigned Form?filters=[["form_doctype","=","${doctype}"],["assigned_to","=","${assignedTo}"]]&fields=["name"]`,
     { headers: { Authorization: authorization } }
   );
 
